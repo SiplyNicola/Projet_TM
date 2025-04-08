@@ -1,0 +1,81 @@
+/* Couleurs globales */
+body.bg-dark {
+    background-color: #121212 !important;
+    color: #ffffff;
+  }
+  
+  /* Cartes */
+  .card {
+    background-color: #1e1e1e;
+    border: 1px solid #9966FF;
+    box-shadow: 0 0 15px rgba(153, 102, 255, 0.3);
+  }
+  
+  /* Titres */
+  h2 {
+    color: #9966FF;
+  }
+  
+  /* Champs de formulaire */
+  .form-control {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: #ffffff;
+  }
+  
+  .form-control:focus {
+    background-color: #2a2a2a;
+    border-color: #9966FF;
+    box-shadow: 0 0 0 0.25rem rgba(153, 102, 255, 0.25);
+  }
+  
+  /* Labels */
+  .form-label {
+    color: #cccccc;
+  }
+  
+  /* Texte d'erreur */
+  .form-text.erreur {
+    color: #ff6b6b;
+  }
+  
+  /* Boutons principaux */
+  .btn-primary {
+    background-color: #9966FF;
+    border-color: #9966FF;
+    color: #fff;
+  }
+  
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: #7a4dff;
+    border-color: #7a4dff;
+  }
+  
+  /* Nav-tabs (onglets) */
+  .nav-tabs {
+    border-bottom: 1px solid #9966FF;
+  }
+  
+  .nav-tabs .nav-link {
+    background-color: transparent;
+    color: #ccc;
+    border: 1px solid transparent;
+  }
+  
+  .nav-tabs .nav-link.active {
+    background-color: #2a2a2a;
+    color: #fff;
+    border-color: #9966FF #9966FF #2a2a2a;
+  }
+  
+  /* Texte muted */
+  .text-muted {
+    color: #999 !important;
+  }
+  
+  /* Ombres custom si besoin */
+  .shadow-custom {
+    box-shadow: 0 0 20px rgba(153, 102, 255, 0.2);
+  }
+  
