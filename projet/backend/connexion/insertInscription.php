@@ -14,6 +14,9 @@ try {
     // Connexion à la base de données
     $conn = pdo_connectDB("127.0.0.1", "3306", "db_projet_tm", "adminProjet", "Pv8gTpwzuBHokz4f");
 
+    // Démarre une transaction
+    $conn->beginTransaction();
+
     // Préparation de la requête
     $query = "INSERT INTO utilisateur(nom, prenom, pseudo, adresse_email, mot_de_passe, role) 
               VALUES (:nom, :prenom, :pseudo, :adresse_email, :mot_de_passe, :role)";
@@ -30,8 +33,13 @@ try {
 
     // Exécution de la requête d'insertion
     $statement->execute();
+
+    // Si tout s'est bien passé, on valide la transaction
+    $conn->commit();
 } 
 catch (PDOException $e) {
+    // En cas d'erreur, on annule la transaction
+    $conn->rollBack();
     echo "Erreur : " . $e->getMessage();
 }
 
