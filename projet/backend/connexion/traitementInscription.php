@@ -13,11 +13,11 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Vérifie si le nom est vide ou contient des caractères invalides
-        if (empty($_POST["registerNom"])) {
+        if (empty($_POST["inscriptionNom"])) {
             $erreur["nom"] = "Votre nom est nécessaire";
             $erreur["reussi"] = false;
         } else {
-            $nom = test_input($_POST["registerNom"]);
+            $nom = test_input($_POST["inscriptionNom"]);
             if (!preg_match("/^[\p{L}\s'-]+$/u", $nom)) {
                 $erreur["nom"] = "Seuls les lettres et les espaces sont autorisés";
                 $erreur["reussi"] = false;
@@ -25,11 +25,11 @@
         }
 
         // Vérifie si le prénom est vide ou contient des caractères invalides
-        if (empty($_POST["registerPrenom"])) {
+        if (empty($_POST["inscriptionPrenom"])) {
             $erreur["prenom"] = "Votre prénom est nécessaire";
             $erreur["reussi"] = false;
         } else {
-            $prenom = test_input($_POST["registerPrenom"]);
+            $prenom = test_input($_POST["inscriptionPrenom"]);
             if (!preg_match("/^[\p{L}\s'-]+$/u", $prenom)) {
                 $erreur["prenom"] = "Seuls les lettres et les espaces sont autorisés";
                 $erreur["reussi"] = false;
@@ -37,11 +37,11 @@
         }
 
         // Vérifie si le nom d'utilisateur est valide
-        if (empty($_POST["registerUsername"])) {
+        if (empty($_POST["inscriptionNomUtilisateur"])) {
             $erreur["nom_utilisateur"] = "Vous avez besoin d'un nom d'utilisateur";
             $erreur["reussi"] = false;
         } else {
-            $nomUtilisateur = test_input($_POST["registerUsername"]);
+            $nomUtilisateur = test_input($_POST["inscriptionNomUtilisateur"]);
             if (!preg_match("/^[a-zA-Z0-9_]+$/", $nomUtilisateur)) {
                 $erreur["nom_utilisateur"] = "Seuls les lettres, chiffres et underscore sont autorisés";
                 $erreur["reussi"] = false;
@@ -49,11 +49,11 @@
         }
 
         // Vérifie si l'adresse email est valide
-        if (empty($_POST["registerEmail"])) {
+        if (empty($_POST["inscriptionAdresseMail"])) {
             $erreur["mail"] = "Votre adresse email est nécessaire";
             $erreur["reussi"] = false;
         } else {
-            $adresseEmail = test_input($_POST["registerEmail"]);
+            $adresseEmail = test_input($_POST["inscriptionAdresseMail"]);
             if (!filter_var($adresseEmail, FILTER_VALIDATE_EMAIL)) {
                 $erreur["mail"] = "Adresse email invalide";
                 $erreur["reussi"] = false;
@@ -61,14 +61,14 @@
         }
 
         // Vérifie si les mots de passe sont identiques et valides
-        if (empty($_POST["registerPassword"])) {
+        if (empty($_POST["inscriptionMotDePasse"])) {
             $erreur["mot_de_passe"] = "Le mot de passe est requis";
             $erreur["reussi"] = false;
         } elseif (empty($_POST["registerConfirmPassword"])) {
             $erreur["mot_de_passe"] = "Veuillez confirmer votre mot de passe";
             $erreur["reussi"] = false;
         } else {
-            $motDePasse = test_input($_POST["registerPassword"]);
+            $motDePasse = test_input($_POST["inscriptionMotDePasse"]);
             $confirmMotDePasse = test_input($_POST["registerConfirmPassword"]);
 
             if ($motDePasse !== $confirmMotDePasse) {
@@ -83,7 +83,7 @@
         // Si aucune erreur n'est présente, on vérifie le pseudo et l'email dans la base de données
         if ($erreur["reussi"]) {
             try {
-                $pdo = pdo_connectDB("127.0.0.1","3308", "db_projet_tm", "userProjet", "wNcEaRvH3OlAZkzY");
+                $pdo = pdo_connectDB("127.0.0.1","3306", "db_projet_tm", "utilisateurProjet", "wNcEaRvH3OlAZkzY");
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
                 // Préparation de la requête pour vérifier le pseudo et l'email

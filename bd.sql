@@ -75,12 +75,12 @@ alter table utilisateur add constraint uq_pseudo unique (pseudo);
 alter table utilisateur add constraint uq_adresse_email unique (adresse_email);
 
 -- Créer les utilisateurs admin et utilisateur
-create user 'userProjet'@'localhost' identified by 'wNcEaRvH3OlAZkzY';
-grant select on db_projet_tm.* to 'userProjet'@'localhost';
-grant all prileves on db_projet_tm.publication to 'userProjet'@'localhost';
-grant all privileges on db_projet_tm.commentaire to 'userProjet'@'localhost';
-grant all privileges on db_projet_tm.abonneutilisateur to 'userProjet'@'localhost';
-grant all privileges on db_projet_tm.abonnecategorie to 'userProjet'@'localhost';
+create user 'utilisateurProjet'@'localhost' identified by 'wNcEaRvH3OlAZkzY';
+grant select on db_projet_tm.* to 'utilisateurProjet'@'localhost';
+grant all prileves on db_projet_tm.publication to 'utilisateurProjet'@'localhost';
+grant all privileges on db_projet_tm.commentaire to 'utilisateurProjet'@'localhost';
+grant all privileges on db_projet_tm.abonneutilisateur to 'utilisateurProjet'@'localhost';
+grant all privileges on db_projet_tm.abonnecategorie to 'utilisateurProjet'@'localhost';
 
 
 create user 'adminProjet'@'localhost' identified by 'Pv8gTpwzuBHokz4f';
