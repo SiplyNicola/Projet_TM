@@ -27,6 +27,21 @@ $(document).ready(function() {
                             // Réinitialise le formulaire après inscription réussie
                             $('#inscriptionForm')[0].reset();
                             alert("Vous avez été correctement inscrit !");
+
+                            // Permets de repasser automatiquement sur le menu de connexion
+                            $('#login-tab').addClass('active');
+                            $('#register-tab').removeClass('active');
+
+                            $('#login').addClass('show active');
+                            $('#register').removeClass('show active');
+
+                            $('#register').removeClass('active');
+                            $('#login').addClass('active');
+
+                            // Met à jour les attributs ARIA
+                            $('#login-tab').attr('aria-selected', 'true');
+                            $('#register-tab').attr('aria-selected', 'false');
+                            
                         }
                     });
                 } else {
@@ -68,6 +83,7 @@ $(document).ready(function() {
                 // Si les identifiants sont valides
                 if (data_retour.reussi) {
                     alert("Vous vous êtes connecté avec succès !");
+                    window.location.href = "../forum/index.html"; // Redirection vers la page d'accueil
                 } else {
                     // Affiche le message d'erreur renvoyé par le serveur
                     $("#err_connexion").html(data_retour.message || "");
