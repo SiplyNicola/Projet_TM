@@ -4,10 +4,7 @@
 
     $erreur = [
         "reussi" => true,
-        "message" => "",
-        "id" => "",
-        "pseudo" => "",
-        "role" => ""
+        "message" => ""
     ];
 
     $adresseEmail = $_POST["loginEmail"];

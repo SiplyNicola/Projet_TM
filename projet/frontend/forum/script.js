@@ -1,14 +1,14 @@
 $(function () {
     $.ajax({
         url: "../../backend/forum/verifierConnexion.php",
-        type: "POST", // ou GET si tu préfères
+        type: "POST",
         dataType: "json",
         success: function (response) {
             console.log(response);
             if (response.connecte) {
-                $("#connexion").text("Se déconnecter").attr("connecte", "true");
+                $("#connexion").text("Se déconnecter");
             } else {
-                $("#connexion").text("Se connecter / S'inscrire").attr("connecte", "false");
+                $("#connexion").text("Se connecter / S'inscrire");
             }
         },
         error: function () {
