@@ -4,7 +4,10 @@
 
     $erreur = [
         "reussi" => true,
-        "message" => ""
+        "message" => "",
+        "id" => "",
+        "pseudo" => "",
+        "role" => ""
     ];
 
     $adresseEmail = $_POST["loginEmail"];
@@ -35,14 +38,15 @@
             if (password_verify($motDePasse, $motDePasseStocker)) {
                 // Mot de passe correct
                 $erreur["reussi"] = true;
-                
-                ini_set('session.gc_maxlifetime', 3600);
+
                 session_start();
                 
                 // Initialisation des variables de session
                 $_SESSION['id'] = $idUtilisateur;
                 $_SESSION['pseudo'] = $pseudoUtilisateur;
                 $_SESSION['role'] = $roleUtilisateur;
+                
+                session_write_close();
 
             } else {
                 // Mot de passe incorrect
