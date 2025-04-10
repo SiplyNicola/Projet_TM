@@ -33,14 +33,14 @@ $(document).ready(function() {
                         dataType: "json",
                         success: function(data) {
                             console.log(data.message);
-                            window.location.href = "./index.html"; // Redirection vers la page d'accueil
+                            window.location.assign("./index.html"); // Redirection vers la page d'accueil
                         },
                         error: function(xhr, status, error) {
                             console.error("Erreur AJAX :", status, error);
                         }
                     });
                 } else {
-                    window.location.href = "../connexion/connexion.html";
+                    window.location.assign("../connexion/connexion.html");
                 }
             },
             error: function(xhr, status, error) {

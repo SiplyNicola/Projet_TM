@@ -83,7 +83,7 @@ $(document).ready(function() {
                 // Si les identifiants sont valides
                 if (data_retour.reussi) {
                     alert("Vous vous êtes connecté avec succès !");
-                    window.location.href = "../forum/index.html"; // Redirection vers la page d'accueil
+                    window.location.assign("../forum/index.html"); // Redirection vers la page d'accueil
                 } else {
                     // Affiche le message d'erreur renvoyé par le serveur
                     $("#err_connexion").html(data_retour.message || "");
