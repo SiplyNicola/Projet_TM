@@ -48,4 +48,8 @@ $(document).ready(function() {
             }
         });
     });
+    $(".nav-link:contains('Profil')").click(function (event) {
+        event.preventDefault();
+        window.location.href = "../connexion/profil.html"; // Redirection vers la page de profil
+    });
 });
