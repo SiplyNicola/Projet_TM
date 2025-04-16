@@ -1,13 +1,20 @@
 $(function () {
+    console.log(document);
     $.ajax({
-        url: "../../backend/forum/verifierConnexion.php",
+        url: "../../backend/forum/recupererInfoUtilisateur.php",
         type: "POST",
         dataType: "json",
         success: function (response) {
             console.log(response);
             if (response.connecte) {
                 $("#connexion").text("Se déconnecter");
+                $("#profil").show();
+                if(response.role === "admin"){
+                    $("#admin").show();
+                }
             } else {
+                $("#profil").hide();
+                $("#admin").hide();
                 $("#connexion").text("Se connecter / S'inscrire");
             }
         },
@@ -22,7 +29,7 @@ $(document).ready(function() {
         event.preventDefault();
 
         $.ajax({
-            url: "../../backend/forum/verifierConnexion.php",
+            url: "../../backend/forum/recupererInfoUtilisateur.php",
             method: "POST",
             dataType: "json",
             success: function(data_retour) {
@@ -32,7 +39,6 @@ $(document).ready(function() {
                         method: "POST",
                         dataType: "json",
                         success: function(data) {
-                            console.log(data.message);
                             window.location.assign("./index.html"); // Redirection vers la page d'accueil
                         },
                         error: function(xhr, status, error) {
@@ -47,9 +53,5 @@ $(document).ready(function() {
                 console.error("Erreur AJAX :", status, error);
             }
         });
-    });
-    $(".nav-link:contains('Profil')").click(function (event) {
-        event.preventDefault();
-        window.location.href = "../connexion/profil.html"; // Redirection vers la page de profil
     });
 });

@@ -26,7 +26,6 @@ $(document).ready(function() {
                         success: function(data) {
                             // Réinitialise le formulaire après inscription réussie
                             $('#inscriptionForm')[0].reset();
-                            alert("Vous avez été correctement inscrit !");
 
                             // Permets de repasser automatiquement sur le menu de connexion
                             $('#login-tab').addClass('active');
@@ -58,10 +57,6 @@ $(document).ready(function() {
             error: function(xhr, status, error) {
                 console.error("Erreur AJAX :", status, error);
             },
-
-            complete: function() {
-                console.log("Requête terminée");
-            }
         });
     });
 
@@ -82,11 +77,11 @@ $(document).ready(function() {
             success: function(data_retour) {
                 // Si les identifiants sont valides
                 if (data_retour.reussi) {
-                    alert("Vous vous êtes connecté avec succès !");
                     window.location.assign("../forum/index.html"); // Redirection vers la page d'accueil
                 } else {
                     // Affiche le message d'erreur renvoyé par le serveur
                     $("#err_connexion").html(data_retour.message || "");
+                    console.log(data_retour);
                 }
             },
 
@@ -94,10 +89,6 @@ $(document).ready(function() {
             error: function(xhr, status, error) {
                 console.error("Erreur AJAX :", status, error);
             },
-
-            complete: function() {
-                console.log("Requête terminée");
-            }
         });
     });
 });

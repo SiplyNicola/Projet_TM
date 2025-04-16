@@ -3,10 +3,16 @@
     session_start();
 
     $retour = [
-        "connecte" => false
+        "connecte" => false,
+        "id" => "",
+        "pseudo" => "",
+        "role" => ""
     ];
     if(isset($_SESSION["id"])) {
         $retour["connecte"] = true;
+        $retour["id"] = $_SESSION["id"];
+        $retour["pseudo"] = $_SESSION["pseudo"];
+        $retour["role"] = $_SESSION["role"];
     } else {
         $retour["connecte"] = false;
     }

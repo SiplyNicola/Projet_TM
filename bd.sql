@@ -1,9 +1,9 @@
 -- Supprimer la base si existante
-drop database if exists db_projet_tm;
+drop database if exists 4UM_bdd;
 
 -- Création de la db
-create database if not exists db_projet_tm;
-use db_projet_tm;
+create database if not exists 4UM_bdd;
+use 4UM_bdd;
 
 -- Création de la table utilisateur
 create table if not exists utilisateur(
