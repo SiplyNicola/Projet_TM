@@ -3,6 +3,10 @@ body.bg-dark {
     background-color: #121212 !important;
     color: #ffffff;
   }
+  .profil-texte-blanc {
+    color: white;
+}
+
   
   /* Cartes */
   .card {
@@ -83,3 +87,77 @@ body.bg-dark {
   .card-title {
     color: #ffffff;
   }
+
+
+  .btn-creer-post {
+    background-color: transparent;
+    border: 1px solid #9966FF;
+    color: #ccc;
+    font-weight: normal;
+    padding: 6px 16px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    opacity: 0.85;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none; 
+}
+
+.btn-creer-post:hover {
+  background-color: #9966FF20;
+  color: #ffc107;
+  border-color: #ffc107;
+  opacity: 1;
+  text-decoration: none;
+}
+.profil-card {
+  background-color: #2c2f33;
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+}
+
+.profil-card:hover {
+  transform: scale(1.02);
+}
+
+.profil-info {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+.btn-animate:hover {
+  transform: scale(1.05);
+  transition: 0.2s ease-in-out;
+}
+
+.profil-icon {
+  margin-right: 8px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer a {
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.footer a:hover {
+  color: #ffc107;
+  text-decoration: underline;
+}
+
