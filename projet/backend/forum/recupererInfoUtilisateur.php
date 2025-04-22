@@ -1,5 +1,6 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
+include("../connect.php");
 session_start();
 
 $retour = [
@@ -20,7 +21,7 @@ if (isset($_SESSION["id"])) {
     
     // Si l'utilisateur est connecté, récupère le nombre d'abonnés et d'abonnements
     try {
-        $pdo = new PDO('mysql:host=localhost;dbname=4um;charset=utf8', 'root', '');
+        $pdo = pdo_connectDB("127.0.0.1", "3306", "db_projet_tm", "root", "");
         // Nombre d'abonnés (ceux qui suivent l'utilisateur)
         $stmt1 = $pdo->prepare("SELECT COUNT(*) FROM abonnements WHERE id_suivi = ?");
         $stmt1->execute([$_SESSION["id"]]);

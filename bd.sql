@@ -29,6 +29,7 @@ create table if not exists publication(
     id int not null auto_increment,
     id_utilisateur int not null,
     id_categorie int not null,
+    titre text not null,
     contenu text not null,
     date_publication datetime not null default CURRENT_TIMESTAMP,
     primary key(id)

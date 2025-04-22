@@ -43,16 +43,36 @@
             <!-- Sidebar (pour les catégories, ou autre) -->
             <div class="col-md-3">
                 <div class="list-group" id="nav-categorie">
-                    <a href="#" class="list-group-item list-group-item-action active">Catégorie 1</a>
-                    <a href="#" class="list-group-item list-group-item-action">Catégorie 2</a>
-                    <a href="#" class="list-group-item list-group-item-action">Catégorie 3</a>
-                    <a href="#" class="list-group-item list-group-item-action">Catégorie 4</a>
+                    <a href="#" class="list-group-item list-group-item-action categorie active">Tout</a>
                 </div>
             </div>
 
             <!-- Main Content -->
-            <div class="col-md-9">
+            <div class="col-md-9 text-light">
                 <h3 class="mb-4">Derniers sujets</h3>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Ajouter un nouveau sujet</h5>
+                        <form id="publicationForm">
+                            <div class="mb-3">
+                                <label for="titre" class="form-label">Titre du sujet</label>
+                                <input type="text" class="form-control" name="titre" id="publicationTitre" placeholder="Titre">
+                                <span class="form-text erreur" id="err_titre"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="choixCategorie" class="form-label">Catégorie du sujet</label>
+                                <select name="choixCategorie" class="form-control" id="choixCategorie"></select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contenu" class="form-label">Contenu du sujet</label>
+                                <textarea class="form-control" name="contenu" id="publicationContenu" rows="3" placeholder="Contenu du sujet"></textarea>
+                                <span class="form-text erreur" id="err_contenu"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Publier</button>
+                        </form>
+                    </div>
+                </div>
 
                 <!-- Post Example -->
                 <div class="card mb-3">
@@ -70,38 +90,8 @@
                     </div>
                 </div>
 
-                <!-- Autres posts -->
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Autre sujet de discussion</h5>
-                        <p class="card-text">Description du second post de discussion.</p>
-                        <p class="text-muted">Posté par <strong>Utilisateur456</strong> | 5h ago</p>
+                
 
-                        <!-- Option admin (visible uniquement pour admin) -->
-                        <div class="admin-options" style="display: none;">
-                            <a href="#" class="btn btn-warning">Supprimer</a>
-                            <a href="#" class="btn btn-secondary">Éditer</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ajouter un sujet -->
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Ajouter un nouveau sujet</h5>
-                        <form>
-                            <div class="mb-3">
-                                <label for="postTitle" class="form-label">Titre du sujet</label>
-                                <input type="text" class="form-control" id="postTitle" placeholder="Titre">
-                            </div>
-                            <div class="mb-3">
-                                <label for="postContent" class="form-label">Contenu du sujet</label>
-                                <textarea class="form-control" id="postContent" rows="3" placeholder="Contenu du sujet"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Publier</button>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
