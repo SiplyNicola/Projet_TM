@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>4UM - Accueil</title>
+  <link rel="icon" type="image/png" href="../resources/logo.png">
+  <script src="../jquery.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="script.js"></script>
+</head>
+
+<body class="bg-dark text-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">4UM</a>
+    </div>
+  </nav>
+
+  <div class="container my-5">
+    <div class="card p-4 bg-dark text-light border-light shadow-sm">
+      <h1 class="mb-4 text-center text-primary">Charte du Forum</h1>
+      <p>
+        Bienvenue sur <strong>4UM</strong>, un espace d’échange libre dédié à la discussion constructive, au partage de savoirs et à la rencontre des idées.
+      </p>
+      <p>
+        Notre ambition est de favoriser un climat de confiance, de respect mutuel et de liberté d’expression, dans les limites posées par la loi et la dignité humaine. Chaque membre, en rejoignant cette communauté, s’engage à contribuer à un environnement sain, inclusif et enrichissant.
+      </p>
+      <p>
+        La diversité des opinions est une richesse, mais elle ne peut s’exprimer sans le socle fondamental du respect. Sont proscrits tout propos à caractère haineux, discriminatoire, diffamatoire, ou incitant à la violence. De même, les contenus illégaux, les attaques personnelles ou les comportements toxiques n’ont pas leur place sur ce forum.
+      </p>
+      <p>
+        <strong>4UM</strong> repose sur une modération humaine et équilibrée, dont le rôle est de préserver la qualité des échanges tout en garantissant la liberté de parole. Cette modération peut intervenir, avec discernement, pour alerter, corriger ou, en dernier recours, sanctionner.
+      </p>
+      <p>
+        En accédant au forum, chaque utilisateur accepte cette charte de manière implicite et reconnaît sa responsabilité individuelle dans le maintien d’un dialogue respectueux et constructif.
+      </p>
+      <p class="mb-4">
+        Ensemble, faisons de <strong>4UM</strong> un espace de réflexion, de curiosité et d’écoute, à la hauteur des exigences de notre temps.
+      </p>
+
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="acceptCharter" />
+        <label class="form-check-label" for="acceptCharter">
+          J’ai lu et j’accepte la charte du forum.
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer mt-5 py-4 bg-dark text-light border-top border-secondary">
+    <div class="container text-center">
+      <p class="mb-2">© 2025 4UM - Tous droits réservés</p>
+      <div class="footer-links">
+        <a href="index.html" class="text-light mx-2">Accueil</a> 
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const checkbox = document.getElementById("acceptCharter");
+      checkbox.addEventListener("change", function () {
+        if (this.checked) {
+          alert("Merci pour votre engagement ! Vous contribuez à faire de 4UM un espace respectueux pour tous.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
