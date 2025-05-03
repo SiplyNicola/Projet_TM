@@ -49,7 +49,7 @@
 
             <!-- Main Content -->
             <div class="col-md-9 text-light">
-                <h3 class="mb-4">Derniers sujets</h3>
+                <h3 class="mb-4">Publication</h3>
 
                 <div class="card mb-3">
                     <div class="card-body">
@@ -74,24 +74,29 @@
                     </div>
                 </div>
 
+                <h3 class="mb-4">Derniers sujets</h3>
                 <!-- Post Example -->
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Titre du sujet</h5>
-                        <p class="card-text">Voici le contenu du premier post de discussion. Vous pouvez l'éditer ou le
-                            commenter.</p>
-                        <p class="text-muted">Posté par <strong>Utilisateur123</strong> | 2h ago</p>
-
-                        <!-- Option admin (visible uniquement pour admin) -->
-                        <div class="admin-options" style="display: none">
-                            <a href="#" class="btn btn-warning">Supprimer</a>
-                            <a href="#" class="btn btn-secondary">Éditer</a>
+                <div id="card-container">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <p class="text-muted"><strong>Utilisateur123</strong></p>
+                                    <h5 class="card-title">Titre du sujet</h5>
+                                    <p class="card-text">Voici le contenu du premier post de discussion. Vous pouvez l'éditer ou le
+                                        commenter.</p>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <input type="text" class="form-control" name="reponse" id="reponse">
+                                    <button type="submit" class="btn btn-primary">Répondre</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- Ajouts des cards pour chaque publication -->
                 </div>
-
-                
-
             </div>
         </div>
     </div>

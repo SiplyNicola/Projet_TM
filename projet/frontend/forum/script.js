@@ -1,5 +1,5 @@
 $(function () {
-    console.log(document);
+    // Vérifie si l'utilisateur est connecté et ajuste le visuel si c'est le cas ou non
     $.ajax({
         url: "../../backend/forum/recupererInfoUtilisateur.php",
         type: "POST",
@@ -22,6 +22,7 @@ $(function () {
             console.error("Erreur lors de la vérification de session");
         }
     });
+    //Récupère toutes les catégories de la base de données et les affiche dans le menu de gauche sur la page d'accueil du forum
     $.ajax({
         url: "../../backend/admin/recupererCategories.php",
         type: "POST",
@@ -39,6 +40,27 @@ $(function () {
                         .attr("href", "#")
                         .addClass("list-group-item list-group-item-action categorie")
                         .text(reponse.titre)
+                );
+            });
+        },
+        error: function () {
+            console.error("Erreur lors de la vérification de session");
+        }
+    });
+    //Récupère toutes les publications de la base de données et les affiche sur la page d'accueil du forum
+    $.ajax({
+        url: "../../backend/forum/recupererPublications.php",
+        type: "POST",
+        dataType: "json",
+        success: function (publications) {
+            console.log(publications);
+            $.each(publications.publication, function (index, reponse) {
+                console.log(reponse)
+                $('#card-container').append(
+                    $('<div>', {
+                        class: 'publication',
+                        html: '<h3>' + reponse.titre + '</h3><p>' + reponse.contenu + '</p>'
+                    })
                 );
             });
         },
