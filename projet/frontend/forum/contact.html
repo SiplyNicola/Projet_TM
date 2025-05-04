@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>4UM - Accueil</title>
+  <link rel="icon" type="image/png" href="../resources/logo.png" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="../jquery.js"></script>
+  <script src="../redirection.js"></script>
+  <script src="script.js"></script>
+</head>
+<body class="bg-dark">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="../forum/index.html">4UM</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="../forum/index.html">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="../forum/charte.html">Charte</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Contenu -->
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Contactez-nous</h1>
+    <div class="row mb-4">
+      <div class="col-md-6 mb-4">
+        <div class="card p-4">
+          <h4>Coordonnées</h4>
+          <p><strong>Téléphone :</strong> 0465 89 75 74</p>
+          <p><strong>Adresse :</strong><br>
+            HELHa – Campus de Mons<br>
+            Chaussée de Binche 159,<br>
+            7000 Mons, Belgique
+          </p>
+          <div class="ratio ratio-4x3">
+            <iframe 
+              src="https://www.google.com/maps?q=Helha%20Campus,%20Chaussée%20de%20Binche%20159,%207000%20Mons&output=embed"
+              allowfullscreen
+              loading="lazy"
+              title="Carte HELHa"
+              class="rounded">
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+    <div class="col-md-6">
+      <div class="card p-4">
+        <h4>Formulaire de contact</h4>
+        <form id="contactForm">
+          <div class="mb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" id="nom" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Adresse email</label>
+            <input type="email" id="email" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea id="message" class="form-control" rows="4" required></textarea>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="consentement" required />
+            <label class="form-check-label" for="consentement">
+              J'accepte que les informations récoltées par le biais de ce formulaire soient utilisées pour répondre à ma demande.
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Envoyer</button>
+          <div id="confirmationMessage" class="mt-3 text-success fw-bold" style="display: none;">
+            ✅ Votre message a bien été envoyé.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pied de page -->
+<footer class="footer bg-dark text-light py-4 mt-5">
+  <div class="container text-center">
+    <p>&copy; 2025 4UM - Tous droits réservés.</p>
+  </div>
+</footer>
+
+<!-- Script confirmation -->
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('confirmationMessage').style.display = 'block';
+    this.reset();
+  });
+</script>
+
+</body>
+</html>

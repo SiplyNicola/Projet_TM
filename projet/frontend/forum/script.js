@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
     // Vérifie si l'utilisateur est connecté et ajuste le visuel si c'est le cas ou non
     $.ajax({
         url: "../../backend/forum/recupererInfoUtilisateur.php",
@@ -22,54 +22,7 @@ $(function () {
             console.error("Erreur lors de la vérification de session");
         }
     });
-    //Récupère toutes les catégories de la base de données et les affiche dans le menu de gauche sur la page d'accueil du forum
-    $.ajax({
-        url: "../../backend/admin/recupererCategories.php",
-        type: "POST",
-        dataType: "json",
-        success: function (categorie) {
-            $.each(categorie, function (index, reponse) {
-                $('#choixCategorie').append(
-                    $('<option>', {
-                        value: reponse.id,
-                        text: reponse.titre
-                    })
-                );
-                $("#nav-categorie").append(
-                    $("<a>")
-                        .attr("href", "#")
-                        .addClass("list-group-item list-group-item-action categorie")
-                        .text(reponse.titre)
-                );
-            });
-        },
-        error: function () {
-            console.error("Erreur lors de la vérification de session");
-        }
-    });
-    //Récupère toutes les publications de la base de données et les affiche sur la page d'accueil du forum
-    $.ajax({
-        url: "../../backend/forum/recupererPublications.php",
-        type: "POST",
-        dataType: "json",
-        success: function (publications) {
-            console.log(publications);
-            $.each(publications.publication, function (index, reponse) {
-                console.log(reponse)
-                $('#card-container').append(
-                    $('<div>', {
-                        class: 'publication',
-                        html: '<h3>' + reponse.titre + '</h3><p>' + reponse.contenu + '</p>'
-                    })
-                );
-            });
-        },
-        error: function () {
-            console.error("Erreur lors de la vérification de session");
-        }
-    });
 });
-
 $(document).ready(function() {
     // Lance la connexion de l'utilisateur depuis le formulaire de connexion
     $("#connexion").click(function(event) {
@@ -162,6 +115,16 @@ $(document).ready(function() {
         });
     });
 
-    
-    
+    // Affiche une alerte lorsque l'utilisateur coche la case d'acceptation de la charte
+    $('#acceptCharter').change(function () {
+        if ($(this).is(':checked')) {
+          alert("Merci pour votre engagement ! Vous contribuez à faire de 4UM un espace respectueux pour tous.");
+        }
+      });
+
+      $('#contactForm').submit(function(e) {
+        e.preventDefault();
+        $('#confirmationMessage').show();
+        this.reset();
+      });
 });

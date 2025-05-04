@@ -8,3 +8,4 @@ if ($id && $titre) {
   $stmt->execute(['id' => $id, 'titre' => $titre]);
 }
 echo json_encode(['success' => true]);
+?>

@@ -7,3 +7,4 @@ if ($titre) {
   $stmt->execute(['titre' => $titre]);
 }
 echo json_encode(['success' => true]);
+?>
