@@ -11,6 +11,8 @@
         // Protection XSS (et contre les scripts <script>)
         $titre = htmlspecialchars(trim($_POST["titre"]), ENT_NOQUOTES, 'UTF-8');
         $contenu = htmlspecialchars(trim($_POST["contenu"]), ENT_NOQUOTES, 'UTF-8');
+        $latitude = $_POST['latitude'] !== 'null' ? $_POST['latitude'] : null;
+        $longitude = $_POST['longitude'] !== 'null' ? $_POST['longitude'] : null;
 
         $categorie_id = $_POST["choixCategorie"];
         session_start();
@@ -18,8 +20,8 @@
         session_write_close();
 
         // Préparation de la requête
-        $sql = "INSERT INTO publication (id_utilisateur, id_categorie, titre, contenu, date_publication) 
-                VALUES (:id_utilisateur, :id_categorie, :titre, :contenu, NOW())";
+        $sql = "INSERT INTO publication (id_utilisateur, id_categorie, titre, contenu, date_publication, latitude, longitude) 
+                VALUES (:id_utilisateur, :id_categorie, :titre, :contenu, NOW(), :latitude, :longitude)";
         $statement = $conn->prepare($sql);
 
         // Liaison des paramètres
@@ -27,6 +29,8 @@
         $statement->bindParam(':contenu', $contenu, PDO::PARAM_STR);
         $statement->bindParam(':id_categorie', $categorie_id, PDO::PARAM_INT);
         $statement->bindParam(':id_utilisateur', $id_utilisateur, PDO::PARAM_INT);
+        $statement->bindParam(':latitude', $latitude, PDO::PARAM_STR);
+        $statement->bindParam(':longitude', $longitude, PDO::PARAM_STR);
 
         $statement->execute();
 

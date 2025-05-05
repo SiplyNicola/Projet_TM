@@ -11,7 +11,7 @@ try {
 
     // 1. Récupération des publications avec pseudo
     $sql = "
-        SELECT p.id, p.id_utilisateur, p.id_categorie, p.titre, p.contenu, p.date_publication,
+        SELECT p.id, p.id_utilisateur, p.id_categorie, p.titre, p.contenu, p.date_publication, p.longitude, p.latitude,
                u.pseudo
         FROM publication p
         JOIN utilisateur u ON p.id_utilisateur = u.id
@@ -33,8 +33,12 @@ try {
         $stmtCommentaires = $conn->prepare($sqlCommentaires);
         $stmtCommentaires->bindParam(':id_publication', $publication['id']);
         $stmtCommentaires->execute();
-        $publication['commentaires'] = $stmtCommentaires->fetchAll(PDO::FETCH_ASSOC);
+        $commentaires = $stmtCommentaires->fetchAll(PDO::FETCH_ASSOC);
+        
+        $publication['commentaires'] = $commentaires;
+        $publication['nombre_commentaires'] = count($commentaires); // 👈 Ajout du compteur
     }
+
 
     echo json_encode(["publication" => $publications], JSON_UNESCAPED_UNICODE);
 

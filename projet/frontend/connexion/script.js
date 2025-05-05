@@ -81,7 +81,6 @@ $(document).ready(function() {
                 } else {
                     // Affiche le message d'erreur renvoyé par le serveur
                     $("#err_connexion").html(data_retour.message || "");
-                    console.log(data_retour);
                 }
             },
 
