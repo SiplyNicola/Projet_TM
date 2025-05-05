@@ -51,9 +51,25 @@ function afficherPublications() {
                   
                           // Zone commentaires avec id unique
                           $('<div>', {
-                            class: 'zone-commentaires mt-4',
-                            id: 'commentaires-' + reponse.id
-                          }),
+                                class: 'zone-commentaires mt-4',
+                                id: 'commentaires-' + reponse.id
+                            }).append(
+                                reponse.commentaires && reponse.commentaires.length > 0
+                                    ? $.map(reponse.commentaires, function (commentaire) {
+                                        return $('<div>', { class: 'card border-0 shadow-sm mb-2' }).append(
+                                            $('<div>', { class: 'card-body py-2 px-3' }).append(
+                                                $('<p>', { class: 'card-text mb-1', text: commentaire.contenu }),
+                                                $('<footer>', {
+                                                    class: 'blockquote-footer mt-2',
+                                                    text: 'Par ' + commentaire.pseudo + ' le ' +
+                                                        moment(commentaire.date_commentaire).format("D MMM YYYY à HH:mm")
+                                                })
+                                            )
+                                        );
+                                    })
+                                    : $('<p>', { class: 'text-muted fst-italic', text: 'Aucun commentaire pour cette publication.' })
+                            ),
+                        
                   
                           // Zone de réponse
                           $('<div>', { class: 'input-group mt-4' }).append(

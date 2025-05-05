@@ -1,34 +1,43 @@
 <?php
-    header('Content-Type: application/json; charset=utf-8');
-    include("../connect.php");
+header('Content-Type: application/json; charset=utf-8');
+include("../connect.php");
 
-    try {
-        // Connexion à la base de données
-        $conn = pdo_connectDB("localhost", "3306", "db_projet_tm", "adminProjet", "Pv8gTpwzuBHokz4f");
-        $conn->beginTransaction();
+try {
+    $conn = pdo_connectDB("localhost", "3306", "db_projet_tm", "adminProjet", "Pv8gTpwzuBHokz4f");
+    $conn->beginTransaction();
 
-        // Protection XSS (et contre les scripts <script>)
-        session_start();
-        session_write_close();
+    session_start();
+    session_write_close();
 
-        // Préparation de la requête
-        $sql = "
-            SELECT p.id, p.id_utilisateur, p.id_categorie, p.titre, p.contenu, p.date_publication,
-                u.pseudo
-            FROM publication p
-            JOIN utilisateur u ON p.id_utilisateur = u.id
-            order by p.date_publication desc
+    // 1. Récupération des publications avec pseudo
+    $sql = "
+        SELECT p.id, p.id_utilisateur, p.id_categorie, p.titre, p.contenu, p.date_publication,
+               u.pseudo
+        FROM publication p
+        JOIN utilisateur u ON p.id_utilisateur = u.id
+        ORDER BY p.date_publication DESC
+    ";
+    $statement = $conn->prepare($sql);
+    $statement->execute();
+    $publications = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    // 2. Pour chaque publication, on récupère les commentaires liés
+    foreach ($publications as &$publication) {
+        $sqlCommentaires = "
+            SELECT c.id, c.contenu, c.date_commentaire, u.pseudo
+            FROM commentaire c
+            JOIN utilisateur u ON c.id_utilisateur = u.id
+            WHERE c.id_publication = :id_publication
+            ORDER BY c.date_commentaire ASC
         ";
-
-        $statement = $conn->prepare($sql);
-
-
-        $statement->execute();
-
-        $publication = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        echo json_encode(["publication" => $publication]);
-
-    } catch (Exception $e) {
-        echo json_encode(["success" => false, "message" => $e->getMessage()]);
+        $stmtCommentaires = $conn->prepare($sqlCommentaires);
+        $stmtCommentaires->bindParam(':id_publication', $publication['id']);
+        $stmtCommentaires->execute();
+        $publication['commentaires'] = $stmtCommentaires->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    echo json_encode(["publication" => $publications], JSON_UNESCAPED_UNICODE);
+
+} catch (Exception $e) {
+    echo json_encode(["success" => false, "message" => $e->getMessage()]);
+}
