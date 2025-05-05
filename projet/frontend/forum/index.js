@@ -31,7 +31,9 @@ $(document).ready(function () {
 
     // Lance la publication d'un post sur le forum
     $("#publicationForm").submit(async function(event) {
+        // Désactiver le bouton de soumission pour éviter les soumissions multiples
         event.preventDefault(); // Empêche le rechargement de la page
+        $('#btn_publication').prop('disabled', true);  // Désactive le bouton
         $(".erreur").html("");  // Efface les messages d'erreur précédents
     
         let latitude = null;
@@ -71,6 +73,7 @@ $(document).ready(function () {
                             success: function(data) {
                                 $(".erreur").html(data.message || "");
                                 $('#publicationForm')[0].reset();
+                                $('#btn_publication').prop('disabled', false);
                                 location.reload();
                             },
                             error: function(xhr, status, error) {
@@ -78,6 +81,7 @@ $(document).ready(function () {
                             }
                         });
                     } else {
+                        $('#btn_publication').prop('disabled', false);
                         $("#err_titre").html(data_retour.titre || "");
                         $("#err_contenu").html(data_retour.contenu || "");
                     }
@@ -173,25 +177,21 @@ async function afficherPublications() {
         url: "../../backend/forum/recupererPublications.php",
         type: "POST",
         dataType: "json",
-        success: function (publications) {
+        success: async function (publications) {
             moment.locale('fr'); // Définit la locale à 'fr'
 
-        const promises = publications.publication.map(async (reponse) => {
-            let ville = null;
+            for (let reponse of publications.publication) {
+                let ville = null;
 
-            if (reponse.latitude && reponse.longitude) {
-                try {
-                    ville = await getCityNameFromCoords(reponse.latitude, reponse.longitude);
-                } catch (e) {
-                    console.warn("Erreur de localisation pour la publication ID", reponse.id, e);
+                if (reponse.latitude && reponse.longitude) {
+                    try {
+                        ville = await getCityNameFromCoords(reponse.latitude, reponse.longitude);
+                    } catch (e) {
+                        console.warn("Erreur de localisation pour la publication ID", reponse.id, e);
+                    }
                 }
-            }
 
-            return { reponse, ville };
-        });
-
-        Promise.all(promises).then((publicationsAvecVille) => {
-            publicationsAvecVille.forEach(({ reponse, ville }) => {
+                // Ajout de la publication dans le DOM
                 $('#zone-publications').append(
                     $('<div>', { class: "publication-card" }).append(
                         $('<div>', { class: 'card shadow-sm border-0' }).append(
@@ -259,15 +259,17 @@ async function afficherPublications() {
                         )
                     )
                 );
-            });
-        });
 
+                // Ajout d'un petit délai pour éviter un trop grand nombre de requêtes simultanées
+                await new Promise(resolve => setTimeout(resolve, 100)); // délai de 100ms entre chaque publication
+            }
         },
         error: function () {
             console.error("Erreur lors de la vérification de session");
         }
     });
 }
+
 
 // Fonction pour obtenir la position actuelle de l'utilisateur
 function getCurrentPositionAsync() {

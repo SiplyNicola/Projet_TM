@@ -103,6 +103,8 @@ h1, h2, h3, h4 {
 .btn-primary {
   --bs-btn-active-bg: #7f4cff;
   --bs-btn-active-border-color: #7f4cff;
+  --bs-btn-disabled-bg: #7f4cff;
+  --bs-btn-disabled-border-color: #7f4cff;
   background-color: #9966FF;
   border-color: #9966FF;
   color: white;
