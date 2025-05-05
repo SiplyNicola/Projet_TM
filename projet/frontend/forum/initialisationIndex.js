@@ -47,7 +47,7 @@ function afficherPublications() {
                           $('<h5>', { class: 'card-title fw-bold', text: reponse.titre }),
                           $('<h6>', { class: 'card-subtitle mb-2', text: moment(reponse.date_publication).format("D MMMM YYYY, HH[h]mm") }),
                           $('<p>', { class: 'card-text mt-3', text: reponse.contenu }),
-                          $('<footer>', { class: 'blockquote-footer mt-2', text: 'Publié par : ' + reponse.id_utilisateur }),
+                          $('<footer>', { class: 'blockquote-footer mt-2', text: 'Publié par : ' + reponse.pseudo }),
                   
                           // Zone commentaires avec id unique
                           $('<div>', {

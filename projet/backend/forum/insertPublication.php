@@ -9,8 +9,9 @@
         $conn->beginTransaction();
 
         // Protection XSS (et contre les scripts <script>)
-        $titre = htmlspecialchars(trim($_POST["titre"]), ENT_QUOTES, 'UTF-8');
-        $contenu = htmlspecialchars(trim($_POST["contenu"]), ENT_QUOTES, 'UTF-8');
+        $titre = htmlspecialchars(trim($_POST["titre"]), ENT_NOQUOTES, 'UTF-8');
+        $contenu = htmlspecialchars(trim($_POST["contenu"]), ENT_NOQUOTES, 'UTF-8');
+
         $categorie_id = $_POST["choixCategorie"];
         session_start();
         $id_utilisateur = $_SESSION["id"];
