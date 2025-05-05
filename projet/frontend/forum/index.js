@@ -179,6 +179,10 @@ async function afficherPublications() {
         dataType: "json",
         success: async function (publications) {
             moment.locale('fr'); // Définit la locale à 'fr'
+            if (!publications || !publications.publication || publications.publication.length === 0) {
+                return;
+            }
+            
 
             for (let reponse of publications.publication) {
                 let ville = null;
@@ -193,7 +197,7 @@ async function afficherPublications() {
 
                 // Ajout de la publication dans le DOM
                 $('#zone-publications').append(
-                    $('<div>', { class: "publication-card" }).append(
+                    $('<div>', { class: "publication-card", id_categorie:reponse.id_categorie}).append(
                         $('<div>', { class: 'card shadow-sm border-0' }).append(
                             $('<div>', { class: 'card-body' }).append(
                                 $('<h5>', { class: 'card-title fw-bold', text: reponse.titre }),
