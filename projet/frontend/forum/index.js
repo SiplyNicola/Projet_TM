@@ -41,17 +41,18 @@ $(document).ready(function () {
     
         // Récupère les champs du formulaire
         var form_data = $(this).serialize();
-        
-        try {
-            const position = await getCurrentPositionAsync(); // attend la géolocalisation
-            latitude = position.coords.latitude;
-            longitude = position.coords.longitude;
-        } catch (error) {
-            console.error("Erreur de géolocalisation :", error.message);
-            // Tu peux aussi afficher une erreur à l'utilisateur ici si c'est bloquant
-        }
-    
-        form_data += `&latitude=${encodeURIComponent(latitude)}&longitude=${encodeURIComponent(longitude)}`;
+        if ("geolocation" in navigator) {
+			try {
+				const position = await getCurrentPositionAsync(); // attend la géolocalisation
+				latitude = position.coords.latitude;
+				longitude = position.coords.longitude;
+			} catch (error) {
+				console.error("Erreur de géolocalisation :", error.message);
+				// Tu peux aussi afficher une erreur à l'utilisateur ici si c'est bloquant
+			}
+
+			form_data += `&latitude=${encodeURIComponent(latitude)}&longitude=${encodeURIComponent(longitude)}`;
+		}
 
     
         // Envoie AJAX
@@ -284,7 +285,7 @@ function getCurrentPositionAsync() {
 
 // Fonction pour obtenir le nom de la ville à partir des coordonnées
 async function getCityNameFromCoords(latitude, longitude) {
-    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=50.73040800&lon=3.84844300`;
+    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
 
     const response = await fetch(url, {
         headers: {
@@ -299,5 +300,5 @@ async function getCityNameFromCoords(latitude, longitude) {
     const data = await response.json();
 
     // Affiche la ville si elle est disponible
-    return data.address.village || data.address.town || data.address.country || null;
+    return data.address.village || data.address.town || data.address.city || data.address.country || null;
 }
