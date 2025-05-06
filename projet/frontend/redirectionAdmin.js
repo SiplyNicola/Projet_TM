@@ -4,7 +4,6 @@ $(function() {
         type: "POST",
         dataType: "json",
         success: function (response) {
-            console.log(response);
             if (!response.connecte && response.role !== "admin") {
                 alert("Vous ne faites pas partie de l'équipe d'administrateur.");
                 window.location.assign("../forum/index.html"); // Redirection vers la page de connexion

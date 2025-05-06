@@ -28,7 +28,7 @@
         $contenu = test_input($_POST["contenu"]);
 
         // Ajoute une vérification de caractères valides
-        if (!preg_match('/^[\p{L}\p{N}\s.,!?\'"-]+$/u', $contenu)) {
+        if (!preg_match('/^[\p{L}\p{N}\p{P}\p{S}\s]*$/u', $contenu)) {
             $response["success"] = false;
             $response["message"] = "Caractères invalides dans le commentaire.";
             echo json_encode($response);

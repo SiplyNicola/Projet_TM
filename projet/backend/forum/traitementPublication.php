@@ -25,7 +25,7 @@
             $erreur["reussi"] = false;
         } else {
             $titre = test_input($_POST["titre"]);
-            if (!preg_match('/^[\p{L}\p{N}\s.,!?\'"-]+$/u', $titre)) {
+            if (!preg_match('/^[\p{L}\p{N}\p{P}\p{S}\s]*$/u', $titre)) {
                 $erreur["titre"] = "Caractères invalides dans le titre";
                 $erreur["reussi"] = false;
             }
@@ -38,7 +38,7 @@
             $erreur["reussi"] = false;
         } else {
             $contenu = test_input($_POST["contenu"]);
-            if (!preg_match('/^[\p{L}\p{N}\s.,!?\'"-]+$/u', $titre)) {
+            if (!preg_match('/^[\p{L}\p{N}\p{P}\p{S}\s]*$/u', $titre)) {
                 $erreur["contenu"] = "Caractères invalides dans le contenu";
                 $erreur["reussi"] = false;
             }

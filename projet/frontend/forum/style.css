@@ -240,3 +240,10 @@ h1, h2, h3, h4 {
   background-color: #9966FF;
   color: #fff;
 }
+
+a {
+  color: #aaa;
+}
+a:hover {
+  color: #9966FF;
+}

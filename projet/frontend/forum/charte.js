@@ -5,10 +5,4 @@ $(document).ready(function() {
           alert("Merci pour votre engagement ! Vous contribuez à faire de 4UM un espace respectueux pour tous.");
         }
       });
-
-      $('#contactForm').submit(function(e) {
-        e.preventDefault();
-        $('#confirmationMessage').show();
-        this.reset();
-      });
 });
