@@ -8,7 +8,8 @@ $(document).ready(function () {
           method: 'POST',
           dataType: 'json',
           success: function (data) {
-              if (data.connecte) {
+            console.log(data);  
+            if (data.connecte) {
                   $('#user-pseudo').text(data.pseudo);
                   afficherPublications(data.id)
               } else {
@@ -29,7 +30,8 @@ $(document).ready(function () {
           },
           dataType: 'json',
           success: function (data) {
-              if (data.success) {
+            console.log(data);  
+            if (data.success) {
                   $('#user-pseudo').text(pseudo);
                   afficherPublications(data.id_utilisateur);
               } else {
@@ -42,6 +44,77 @@ $(document).ready(function () {
           }
       });
   }
+
+  $(document).on("click", "#btnActionBannissement", function (event) {
+    event.preventDefault();
+  
+    $.ajax({
+      url: "../../backend/forum/recupererInfoUtilisateur.php",
+      type: "POST",
+      dataType: "json",
+      success: function (sessionData) {
+        if (!sessionData.connecte || sessionData.role !== "admin") return;
+  
+        
+  
+        const urlParams = new URLSearchParams(window.location.search);
+        const pseudoCible = urlParams.get("pseudo");
+
+  
+        if (!pseudoCible || sessionData.pseudo === pseudoCible) return;
+
+        $.ajax({
+          url: "../../backend/forum/get_utilisateur.php",
+          type: "POST",
+          data: { pseudo: pseudoCible },
+          dataType: "json",
+          success: function (userData) {
+            if (!userData.success) return;
+  
+            const banni = userData.utilisateur.banni;
+            const raison = userData.utilisateur.raison_bannissement;
+  
+            const bouton = $("#btnActionBannissement");
+  
+            if (banni === 1) {
+              if (confirm("Confirmez-vous le débannissement ?")) {
+                $.ajax({
+                  url: "../../backend/forum/debannir_utilisateur.php",
+                  type: "POST",
+                  data: { pseudo: pseudoCible },
+                  dataType: "json",
+                  success: function (res) {
+                    alert(res.message);
+                    if (res.success) location.reload();
+                  }
+                });
+              }
+            } else {
+              const motif = prompt("Indiquez la raison du bannissement :");
+              if (motif && confirm("Confirmez-vous le bannissement ?")) {
+                $.ajax({
+                  url: "../../backend/forum/bannir_utilisateur.php",
+                  type: "POST",
+                  data: {
+                    pseudo: pseudoCible,
+                    raison: motif
+                  },
+                  dataType: "json",
+                  success: function (res) {
+                    alert(res.message);
+                    if (res.success) location.reload();
+                  }
+                });
+              }
+            }
+          }
+        });
+      },
+      error: function (xhr, status, error) {
+        console.error("Erreur lors de la vérification de l'admin :", status, error);
+      }
+    });
+  });
 });
 
 

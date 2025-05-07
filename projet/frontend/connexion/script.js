@@ -75,6 +75,13 @@ $(document).ready(function() {
             dataType: "json",
 
             success: function(data_retour) {
+                console.log(data_retour);
+                //si il est banni
+                if(data_retour.banni === 1){
+                    console.log(data_retour);
+                    window.location.assign("../forum/bannissement.html");
+                    return;
+                }
                 // Si les identifiants sont valides
                 if (data_retour.reussi) {
                     window.location.assign("../forum/index.html"); // Redirection vers la page d'accueil

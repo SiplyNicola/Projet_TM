@@ -12,10 +12,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/fr.min.js"></script>
   <link rel="stylesheet" href="style.css" />
   <script src="./../jquery.js"></script>
+  <script src="../redirectionBanni.js"></script>
   <script src="../afficherPublication.js"></script>
   <script src="profil.js"></script>
   <script src="script.js"></script>
-  
 </head>
 
 <body class="bg-dark">
@@ -44,13 +44,20 @@
 
   <div class="container mt-5">
     <div class="card profil-card mb-4 p-4 text-center">
-      <h2 class="mb-4">Profil</h2>
-      <p class="profil-info"><span class="profil-icon"></span><strong>Pseudo :</strong> <span id="user-pseudo"></span></p>
+      <h2 class="mb-4">Mon profil</h2>
+      <p class="profil-info"><strong>Pseudo :</strong> <span id="user-pseudo"></span></p>
       <p class="profil-info">Membre depuis 2025</p>
+      <p class="profil-info">
+        <strong>Abonnés :</strong> <span id="nb-abonnes">...</span> |
+        <strong>Abonnements :</strong> <span id="nb-abonnements">...</span>
+      </p>
       <div class="text-center mt-4">
-        <a href="../forum/index.html" class="btn-creer-post">
-          ✍️ Créer un post
-        </a>
+        <a href="../forum/index.html" class="btn-creer-post">✍️ Créer un post</a>
+      </div>
+
+      <!-- Conteneur pour le bouton Bannir -->
+      <div id="bannirContainer" style="display: none;" class="mt-4">
+        <button id="btnActionBannissement" class="btn btn-danger">⚠️ Bannir cet utilisateur</button>
       </div>
     </div>
     <!-- Zone de publication dynamique -->
@@ -58,6 +65,41 @@
 
     </div>
   </div>
+
+  <script>
+    $(function () {
+      $.ajax({
+        url: "../../backend/forum/recupererInfoUtilisateur.php",
+        type: "POST",
+        dataType: "json",
+        success: function (sessionData) {
+          if (sessionData.connecte && sessionData.role === "admin") {
+            // Affiche le bouton uniquement aux admins
+            $("#bannirContainer").show();
+
+            // Récupère l'ID de l'utilisateur affiché sur la page (tu peux adapter selon ta logique)
+            const urlParams = new URLSearchParams(window.location.search);
+            const idCible = urlParams.get("id");
+
+            $("#btnBannir").on("click", function () {
+              const raison = prompt("Indiquez la raison du bannissement :");
+              if (raison && confirm("Confirmez-vous le bannissement ?")) {
+                $.post("../../backend/forum/bannir_utilisateur.php", {
+                  id: idCible,
+                  raison: raison
+                }, function (reponse) {
+                  alert(reponse.message);
+                  if (reponse.success) {
+                    location.reload();
+                  }
+                }, "json");
+              }
+            });
+          }
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

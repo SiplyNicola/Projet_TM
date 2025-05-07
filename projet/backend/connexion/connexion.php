@@ -4,7 +4,9 @@
 
     $erreur = [
         "reussi" => true,
-        "message" => ""
+        "message" => "",
+        "banni" => "",
+        "raison" => ""
     ];
 
     $adresseEmail = $_POST["loginEmail"];
@@ -17,7 +19,7 @@
         $conn = pdo_connectDB("127.0.0.1", "3306", "db_projet_tm", "utilisateurProjet", "wNcEaRvH3OlAZkzY");
     
         // Préparation de la requête SQL pour récupérer le mot de passe hashé, le nom d'utilisateur, et le rôle
-        $query = "SELECT mot_de_passe, id, pseudo, role FROM utilisateur WHERE adresse_email = :adresse_email";
+        $query = "SELECT * FROM utilisateur WHERE adresse_email = :adresse_email";
         $statement = $conn->prepare($query);
         $statement->bindParam(':adresse_email', $adresseEmail, PDO::PARAM_STR);
         $statement->execute();
@@ -35,6 +37,10 @@
             if (password_verify($motDePasse, $motDePasseStocker)) {
                 // Mot de passe correct
                 $erreur["reussi"] = true;
+                
+                //ici
+                $erreur["banni"]=$user["banni"];
+                $erreur["raison"]=$user["raison_bannissement"];
 
                 session_start();
                 
